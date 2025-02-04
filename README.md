@@ -1,15 +1,25 @@
-📌 Introducción
+# 📌 Introducción
+
 Este proyecto automatiza la implementación de una infraestructura de servidor web en AWS utilizando Terraform. Incluye un proceso de inicialización para la gestión del estado de Terraform y la implementación principal de la infraestructura para un servidor web Apache básico.
 
-🚀 Características principales
-Implementación automatizada de infraestructura
-Gestión del estado con S3 y DynamoDB
-Integración con GitHub Actions
-Servidor web Apache básico
-⚙️ Guía de Configuración
+# 🚀 Características principales
+
+### Implementación automatizada de infraestructura
+
+### Gestión del estado con S3 y DynamoDB
+
+### Integración con GitHub Actions
+
+### Servidor web Apache básico
+
+# ⚙️ Guía de Configuración
+
 🔹 Inicialización del Backend de Estado
 
-cd bootstrap terraform init terraform plan terraform apply
+cd bootstrap
+terraform init
+terraform plan
+terraform apply
 
 🔹 Esto crea:
 
@@ -27,25 +37,30 @@ Validación de la configuración
 
 Aplicación de los cambios
 
-🔹 Para una implementación manual:
-cd infrastructure
-terraform init
-terraform plan
-terraform apply
-Verificación de Recursos
-🔹 Verificación del Backend de Estado
-Verificar el bucket de S3
+# 🔹 Para una implementación manual:
+
+* cd infrastructure
+* terraform init
+* terraform plan
+* terraform apply
+
+# Verificación de Recursos
+
+## 🔹 Verificación del Backend de Estado
+
+### Verificar el bucket de S3
 ✅ aws s3 ls | grep bucket-terraform-lab
 
-Verificar la tabla de DynamoDB
+### Verificar la tabla de DynamoDB
 ✅ aws dynamodb list-tables | grep terraformstatelock
 
-🔹 Verificación de la Infraestructura
-Verificar la VPC
+## 🔹  Verificación de la Infraestructura
+
+### Verificar la VPC
 ✅ aws ec2 describe-vpcs --filters "Name=tag:Name,Values=terraform-vpc"
 
-Verificar la instancia EC2
+### Verificar la instancia EC2
 ✅ aws ec2 describe-instances --filters "Name=tag:Name,Values=webserver" "Name=instance-state-name,Values=running"
 
-Probar el servidor web
+### Probar el servidor web
 ✅ curl http://$(terraform output -raw Webserver-Public-IP)
