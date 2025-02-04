@@ -1,15 +1,26 @@
 name: Terraform Destroy
 on:
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
- tf-destroy:
-   runs-on: ubuntu-latest
-   env:
+  tf-destroy:
+    runs-on: ubuntu-latest
+    env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: 'us-east-1'
-   steps:
-     - name: Terraform destroy
-       id: destroy
-       run: terraform destroy -auto-approved
+    steps:
+      - name: Instalar Terraform
+        run: |
+          TERRAFORM_VERSION="1.10.0"
+          wget https://releases.hashicorp.com/terraform/"$TERRAFORM_VERSION"/terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
+          unzip terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
+          sudo mv terraform /usr/local/bin/
+          sudo chmod +x /usr/local/bin/terraform
+
+      - name: Verificar instalación de Terraform
+        run: terraform --version
+
+      - name: Terraform destroy
+        id: destroy
+        run: terraform destroy -auto-approve
