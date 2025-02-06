@@ -1,36 +1,36 @@
 name: Terraform Apply
 
-on: [push]
+on: [push] # Se ejecuta el workflow en cada push al repositorio
 
 jobs:
   terraform_apply:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Se ejecuta en un runner con Ubuntu
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v1 # Se obtiene el código del repositorio
 
     - name: Install Terraform
       env:
-        TERRAFORM_VERSION: "0.12.15"
+        TERRAFORM_VERSION: "0.12.15" # Versión de Terraform a instalar
       run: |
         tf_version=$TERRAFORM_VERSION
         wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
         unzip terraform_"$tf_version"_linux_amd64.zip
-        sudo mv terraform /usr/local/bin/
+        sudo mv terraform /usr/local/bin/ # Se mueve el binario de Terraform a un directorio accesible
 
     - name: Verify Terraform version
-      run: terraform --version
+      run: terraform --version # Se verifica la versión instalada de Terraform
 
     - name: Terraform init
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: terraform init -input=false
+      run: terraform init -input=false # Inicializa Terraform y descarga los proveedores necesarios
 
     - name: Terraform validation
-      run: terraform validate
+      run: terraform validate # Valida la configuración de Terraform
 
     - name: Terraform apply
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve -input=false # Aplica los cambios sin pedir confirmación
