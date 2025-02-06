@@ -6,10 +6,12 @@ on:
 jobs:
   tf-destroy:
     runs-on: ubuntu-latest # Se ejecuta en un runner con Ubuntu
+    
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Credenciales de AWS
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: 'us-east-1' # Región de AWS por defecto
+      
     steps:
       - name: Instalar Terraform
         run: |
