@@ -1,26 +1,38 @@
 name: Terraform Destroy
+
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Permite ejecutar el workflow manualmente desde GitHub Actions
 
 jobs:
   tf-destroy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Se ejecuta en un runner con Ubuntu
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Credenciales de AWS
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: 'us-east-1'
+      AWS_REGION: 'us-east-1' # Región de AWS por defecto
     steps:
       - name: Instalar Terraform
         run: |
-          TERRAFORM_VERSION="1.10.0"
+          TERRAFORM_VERSION="1.10.0" # Define la versión de Terraform a instalar
           wget https://releases.hashicorp.com/terraform/"$TERRAFORM_VERSION"/terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
           unzip terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
-          sudo mv terraform /usr/local/bin/
-          sudo chmod +x /usr/local/bin/terraform
+          sudo mv terraform /usr/local/bin/ # Mueve el binario a un directorio accesible
+          sudo chmod +x /usr/local/bin/terraform # Asegura permisos de ejecución
 
       - name: Verificar instalación de Terraform
-        run: terraform --version
-
+        run: terraform --version # Muestra la versión instalada de Terraform
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2 # Configura Terraform en el entorno
+      
+      - name: Terraform init
+        id: init
+        run: terraform init # Inicializa el backend y descarga los módulos necesarios
+      
+      - name: Terraform plan (destroy)
+        id: plan
+        run: terraform plan -destroy -no-color -input=false -out destroy-planfile # Genera un plan de destrucción
+      
       - name: Terraform destroy
         id: destroy
-        run: terraform destroy -auto-approve
+        run: terraform destroy -auto-approve -input=false destroy-planfile # Ejecuta la destrucción de recursos sin pedir confirmación
