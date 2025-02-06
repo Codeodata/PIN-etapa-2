@@ -33,8 +33,8 @@ jobs:
         env:
           TERRAFORM_VERSION: "0.12.15" # Versión de Terraform a instalar
         run: |
-          wget https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_$TERRAFORM_VERSION_linux_amd64.zip
-          unzip terraform_$TERRAFORM_VERSION_linux_amd64.zip
+          wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+          unzip "terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
           sudo mv terraform /usr/local/bin/ # Se mueve el binario de Terraform a un directorio accesible
 
       - name: Verify Terraform version
