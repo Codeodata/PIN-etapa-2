@@ -1,7 +1,7 @@
 name: Terraform Apply
 
 on:
-  push: # Se ejecuta el workflow en cada push al repositorio
+  push: # Se ejecuta el workflow cuando hay cambios en el repositorio
       branches:
         - main
   pull_request:  
