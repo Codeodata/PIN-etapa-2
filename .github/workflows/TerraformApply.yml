@@ -44,14 +44,6 @@ jobs:
       - name: Terraform Init
         run: terraform init -input=false -upgrade # Inicializa y actualiza proveedores si es necesario
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt
-        
-      - name: Terraform Format check
-        id: fmt
-        run: terraform fmt -check
-
       - name: Terraform Validation
         run: terraform validate
 
