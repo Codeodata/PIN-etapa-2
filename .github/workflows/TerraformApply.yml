@@ -26,18 +26,13 @@ jobs:
         working-directory: ./modules
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v1 # Se obtiene el código del repositorio
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4 # Se obtiene el código del repositorio
 
-      - name: Install Terraform
-        env:
-          TERRAFORM_VERSION: "0.12.15" # Versión de Terraform a instalar
-        run: |
-          wget "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
-          unzip "terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
-          sudo mv terraform /usr/local/bin/ # Se mueve el binario de Terraform a un directorio accesible
+      - name: Instala Terraform
+        uses: hashicorp/setup-terraform@v2
 
-      - name: Verify Terraform version
+      - name: Version de Terraform
         run: terraform --version # Se verifica la versión instalada de Terraform
 
       - name: Terraform Init
