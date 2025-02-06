@@ -4,7 +4,13 @@ on: [push] # Se ejecuta el workflow en cada push al repositorio
 
 jobs:
   terraform_apply:
+    name: "Apply terrafrom code changes"
     runs-on: ubuntu-latest # Se ejecuta en un runner con Ubuntu
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./modules
+    
     steps:
     - uses: actions/checkout@v1 # Se obtiene el código del repositorio
 
@@ -25,11 +31,21 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: terraform init -input=false # Inicializa Terraform y descarga los proveedores necesarios
-
+    - name: Terraform format
+      id: fmt
+      run: terraform fmt -check
     - name: Terraform validation
       run: terraform validate # Valida la configuración de Terraform
-
+    - name: Terraform plan
+      id: plan
+      run: terraform plan --no-color -input=false -out planfile
+      continue-on-error: true
+    - name: Terraform plan status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+      
     - name: Terraform apply
+      if: steps.plan.outcome == 'success'
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
