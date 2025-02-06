@@ -1,39 +1,15 @@
 name: Terraform Destroy
-
 on:
-  workflow_dispatch: # Permite ejecutar el workflow manualmente desde GitHub Actions
+ workflow_dispatch:
 
 jobs:
-  tf-destroy:
-    runs-on: ubuntu-latest
-    
-    env:
+ tf-destroy:
+   runs-on: ubuntu-latest
+   env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: 'us-east-1'
-      
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./modules # Ajusta esto si tus archivos están en otro directorio
-
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4 # Asegura que el código del repo esté disponible
-
-      - name: Instalar Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0 # Especifica la versión de Terraform a instalar
-
-      - name: Verificar instalación de Terraform
-        run: terraform --version
-      
-      - name: Inicializar Terraform
-        run: terraform init
-      
-      - name: Planificar destrucción de recursos
-        run: terraform plan -destroy -input=false -out destroy-planfile
-      
-      - name: Aplicar plan de destrucción
-        run: terraform apply -auto-approve destroy-planfile
+   steps:
+     - name: Terraform destroy
+       id: destroy
+       run: terraform destroy -auto-approved
