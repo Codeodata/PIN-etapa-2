@@ -7,14 +7,15 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./modules
+
 jobs:
   terraform_apply:
     name: "Apply Terraform Code Changes"
     runs-on: ubuntu-latest # Se ejecuta en un runner con Ubuntu
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./modules
     
     steps:
       - name: Checkout repository
