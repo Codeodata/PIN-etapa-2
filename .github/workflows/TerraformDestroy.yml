@@ -16,7 +16,7 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v2
 
-      - name: Instalar Terraform
+      - name: Configurar Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: "0.12.15"
