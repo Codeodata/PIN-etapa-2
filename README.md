@@ -13,7 +13,7 @@ Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo as�
     La tabla debe llamarse terraformstatelock
     y debe tener el campo LockID en Clave de partición
 
-🔹 Implementación de la Infraestructura
+# 🔹 Implementación de la Infraestructura
 
 ### La infraestructura se implementa automáticamente mediante GitHub Actions.
 
@@ -69,7 +69,7 @@ Se define un output llamado "Webserver-Public-IP" que devuelve la IP pública de
 
 (FIN) 
 
-🔹 Si se quiere una implementación manual:
+# 🔹 Si se quiere una implementación manual:
 
 * cd infrastructure
 * terraform init
@@ -79,7 +79,7 @@ Se define un output llamado "Webserver-Public-IP" que devuelve la IP pública de
 
 # Verificación de Recursos
 
-## 🔹 Verificación del Backend de Estado
+# 🔹 Verificación del Backend de Estado
 
 ### Verificar el bucket de S3
 ✅ aws s3 ls | grep bucket-terraform-lab
@@ -87,7 +87,7 @@ Se define un output llamado "Webserver-Public-IP" que devuelve la IP pública de
 ### Verificar la tabla de DynamoDB
 ✅ aws dynamodb list-tables | grep terraformstatelock
 
-## 🔹  Verificación de la Infraestructura
+# 🔹  Verificación de la Infraestructura
 
 ### Verificar la VPC
 ✅ aws ec2 describe-vpcs --filters "Name=tag:Name,Values=terraform-vpc"
