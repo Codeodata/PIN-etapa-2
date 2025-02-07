@@ -7,6 +7,7 @@ Este proyecto automatiza la implementación de una infraestructura de servidor w
 Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo así):
 
 #### * Un bucket de S3 para almacenar el estado de Terraform.
+    bucket-terraform-lab
 
 #### * Una tabla de DynamoDB para el bloqueo del estado. 
     La tabla debe llamarse terraformstatelock
