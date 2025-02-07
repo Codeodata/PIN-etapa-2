@@ -14,24 +14,20 @@ jobs:
 
     steps:
       - name: Checkout del repositorio
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Instala Terraform
+      - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: "0.12.15"
 
-      - name: Verificar instalación de Terraform
-        run: |
-          terraform_version="0.12.15"
-          wget https://releases.hashicorp.com/terraform/$terraform_version/terraform_$terraform_version_linux_amd64.zip
-          unzip terraform_"$terraform_version"_linux_amd64.zip
-          sudo mv terraform /usr/local/bin
+      - name: Verificar versión de Terraform
+        run: terraform version
 
       - name: Terraform Init
         working-directory: infra
-        run: terraform init -input=false # Inicializa y actualiza proveedores si es necesario
+        run: terraform init -input=false
 
-      - name: Terraform destroy
+      - name: Terraform Destroy
         working-directory: infra
         run: terraform destroy -auto-approve
