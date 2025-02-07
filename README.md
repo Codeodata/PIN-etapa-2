@@ -14,18 +14,13 @@ Este proyecto automatiza la implementación de una infraestructura de servidor w
 
 # ⚙️ Guía de Configuración
 
-🔹 Inicialización del Backend de Estado
+Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo así):
 
-cd bootstrap
-terraform init
-terraform plan
-terraform apply
+# * Un bucket de S3 para almacenar el estado de Terraform.
 
-🔹 Esto crea:
-
-Un bucket de S3 para almacenar el estado de Terraform.
-
-Una tabla de DynamoDB para el bloqueo del estado.
+# * Una tabla de DynamoDB para el bloqueo del estado. 
+    La tabla debe llamarse terraformstatelock
+    y debe tener el campo LockID en Clave de partición
 
 🔹 Implementación de la Infraestructura
 
