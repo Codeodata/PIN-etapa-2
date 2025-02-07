@@ -23,8 +23,7 @@ Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo as�
 
 ✅ Aplicación de los cambios
 
-# Recursos creados automáticamente:
-
+# Recursos creados por Terraform cuando hay cambios en la carpeta infra:
 ## Provider AWS
 
 Se configura el proveedor AWS para la región us-east-1.
