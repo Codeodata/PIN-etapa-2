@@ -15,13 +15,13 @@ Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo as�
 
 🔹 Implementación de la Infraestructura
 
-### La infraestructura se implementa automáticamente mediante GitHub Actions. En cada push a la rama infra el workflow realizará:
+### La infraestructura se implementa automáticamente mediante GitHub Actions.
 
-✅ Inicialización de Terraform
+✅ Inicializa Terraform
 
-✅ Validación de la configuración
+✅ Valida la configuración
 
-✅ Aplicación de los cambios
+✅ Aplica los cambios
 
 # Recursos creados por Terraform cuando hay cambios en la carpeta infra:
 ## Provider AWS
