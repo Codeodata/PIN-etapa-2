@@ -23,7 +23,7 @@ Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo as�
 
 ✅ Aplicación de los cambios
 
-La infra automatizada crea:
+# Recursos creados automáticamente:
 
 ## Provider AWS
 
