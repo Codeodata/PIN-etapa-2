@@ -15,16 +15,19 @@ Manualmente crear el backend (se puede automatizar, pero prefiero mantenerlo as�
 
 🔹 Implementación de la Infraestructura
 
-La infraestructura se implementa automáticamente mediante GitHub Actions. En cada push a la rama main que incluya cambios en el directorio infrastructure/, el workflow realizará:
+### La infraestructura se implementa automáticamente mediante GitHub Actions. 
+### En cada push a la rama infra
+### el workflow realizará:
 
-Inicialización de Terraform
+#### * Inicialización de Terraform
 
-Validación de la configuración
+#### * Validación de la configuración
 
-Aplicación de los cambios
+#### * Aplicación de los cambios
 
-# 🔹 Para una implementación manual:
 
+🔹 Para una implementación manual:
+<
 * cd infrastructure
 * terraform init
 * terraform plan
