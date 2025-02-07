@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Instala Terraform
+      
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: "0.12.15"
@@ -25,7 +26,9 @@ jobs:
           sudo mv terraform /usr/local/bin
           
       - name: Terraform Init
+        working-directory: infra
         run: terraform init -input=false # Inicializa y actualiza proveedores si es necesario
 
       - name: Terraform destroy
+        working-directory: infra
         run: terraform destroy -auto-approve
