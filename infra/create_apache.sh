@@ -25,7 +25,7 @@ cat << 'EOF2' > /var/www/html/index.html
     </style>
   </head>
   <body>
-    <h1>Bienvenidos al Laboratorio de Terraform</h1>
+    <h1>Bienvenidos al Laboratorio de Prueba</h1>
     <p>Esta es una página web desplegada automáticamente.</p>
   </body>
 </html>
